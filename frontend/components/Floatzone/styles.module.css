@@ -1,0 +1,20 @@
+.root {
+  position: fixed;
+  right: 12px;
+  bottom: 12px;
+  transition: all 0.3s ease-in-out;
+  opacity: 0.4;
+  width: 750px;
+}
+
+.root:hover {
+  opacity: 1;
+}
+
+.visible {
+  opacity: 1;
+}
+
+.wrapper {
+  transition: all 0.3s ease-in-out;
+}
