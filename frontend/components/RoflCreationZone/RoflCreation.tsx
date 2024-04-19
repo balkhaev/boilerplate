@@ -14,6 +14,8 @@ type CreateMemeProps = {
   onUploadCancel?: () => void
   onFileDragOver?: () => void
   onRoflSubmit?: () => void
+  onFocus?: () => void
+  onBlur?: () => void
 }
 
 export type RoflCreationItem = {
@@ -22,7 +24,17 @@ export type RoflCreationItem = {
 }
 
 export default forwardRef<HTMLDivElement, CreateMemeProps>(
-  ({ onFileAdded, onUploadCancel, onFileDragOver, onRoflSubmit }, ref) => {
+  (
+    {
+      onFileAdded,
+      onUploadCancel,
+      onFileDragOver,
+      onRoflSubmit,
+      onFocus,
+      onBlur,
+    },
+    ref
+  ) => {
     const router = useRouter()
     const [state, setState] = useState<MemeCreationState>("upload")
     const [rofl, setRofl] = useState<RoflCreationItem>({
@@ -94,6 +106,10 @@ export default forwardRef<HTMLDivElement, CreateMemeProps>(
       )
     }
 
-    return <div ref={ref}>{getContent()}</div>
+    return (
+      <div ref={ref} onFocus={onFocus} onBlur={onBlur}>
+        {getContent()}
+      </div>
+    )
   }
 )

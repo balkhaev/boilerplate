@@ -15,6 +15,7 @@ type FloatzoneProps = {
   visible?: boolean
   opened?: boolean
   onToggle?: () => void
+  onDragOver?: () => void
 }
 
 export function Floatzone({
@@ -23,9 +24,13 @@ export function Floatzone({
   visible,
   opened,
   onToggle,
+  onDragOver,
 }: FloatzoneProps) {
   return (
-    <div className={cn(styles.root, visible && styles.visible)}>
+    <div
+      className={cn(styles.root, visible && styles.visible)}
+      onDragOver={onDragOver}
+    >
       <Box
         display="flex"
         justifyContent="space-between"

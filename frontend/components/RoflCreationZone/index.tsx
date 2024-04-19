@@ -1,9 +1,8 @@
 "use client"
 import { useState } from "react"
 import { Floatzone } from "../Floatzone"
-import CreateMeme from "./RoflCreation"
+import RoflCreation from "./RoflCreation"
 import { useLocalStorage } from "usehooks-ts"
-import { ClickAwayListener } from "@mui/material"
 
 export default function MemeCreationZone() {
   const [visible, setVisible] = useState(false)
@@ -20,13 +19,15 @@ export default function MemeCreationZone() {
     open()
     show()
   }
+  const onFloatzoneDragOver = () => {
+    open()
+    show()
+  }
+
   const onRoflFileAdded = () => {
     show()
   }
   const onUploadCancel = () => {
-    hide()
-  }
-  const onClickAway = () => {
     hide()
   }
   const onRoflSubmit = () => {
@@ -44,15 +45,16 @@ export default function MemeCreationZone() {
       visible={visible}
       title="Загрузить рофлс"
       onToggle={onFloatzoneToggle}
+      onDragOver={onFloatzoneDragOver}
     >
-      <ClickAwayListener onClickAway={onClickAway}>
-        <CreateMeme
-          onFileAdded={onRoflFileAdded}
-          onUploadCancel={onUploadCancel}
-          onFileDragOver={onRoflFileDragOver}
-          onRoflSubmit={onRoflSubmit}
-        />
-      </ClickAwayListener>
+      <RoflCreation
+        onFileAdded={onRoflFileAdded}
+        onUploadCancel={onUploadCancel}
+        onFileDragOver={onRoflFileDragOver}
+        onRoflSubmit={onRoflSubmit}
+        onFocus={show}
+        onBlur={hide}
+      />
     </Floatzone>
   )
 }

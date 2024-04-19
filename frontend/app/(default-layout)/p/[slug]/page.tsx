@@ -11,6 +11,7 @@ export default async function PackPage({
     .from("packs")
     .select("*, rofls(*, files:rofl_files(*))")
     .eq("slug", params.slug)
+    .order("created_at", { referencedTable: "rofl_files" })
     .limit(1)
     .single()
 

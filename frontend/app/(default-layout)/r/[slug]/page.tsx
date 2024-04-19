@@ -12,6 +12,7 @@ export default async function RoflPage({
     .from("rofls")
     .select("*, files:rofl_files( * )")
     .eq("slug", params.slug)
+    .order("created_at", { referencedTable: "rofl_files" })
     .limit(1)
     .single()
 

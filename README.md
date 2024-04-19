@@ -1,4 +1,4 @@
-# My simple boilerplate
+# My simple (нет) boilerplate
 
 Supabase
 
@@ -24,8 +24,16 @@ Frontend
 - Uppy for downloading files
 - Supabase client for working with auth, storage and database
 
-```
+```text
 Most functionality on postgres functions and triggers
 Backend listening for changes in database and processing rows
 In my example listening for uploaded video files for generating thumbnails
 ```
+
+Roadmap
+
+- написать плагин для uppy для обрезки видео (ffmpeg wasm)
+- дать возможность анонимным пользователям заливать контент
+- лайки, просмотры, комментарии, share
+- начать грабить контент с телеги
+- отказаться от mui? в пользу <https://ui.shadcn.com/>

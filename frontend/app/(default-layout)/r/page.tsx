@@ -9,6 +9,7 @@ export default async function RoflsPage() {
   const { data: rofls } = await supabase
     .from("rofls")
     .select("*, files:rofl_files(*), creator:profiles(*)")
+    .order("created_at")
 
   return (
     <Container maxWidth={false} sx={{ mt: 3 }}>

@@ -10,34 +10,34 @@ type RoflGridProps = {
 }
 
 export default function RoflGrid({ rofls }: RoflGridProps) {
-  const supabase = createClient()
+  // const supabase = createClient()
   const [items, setItems] = useState(rofls || [])
 
-  useEffect(() => {
-    const taskListener = supabase
-      .channel("rofls")
-      .on(
-        "postgres_changes",
-        { event: "INSERT", schema: "public", table: "rofls" },
-        async (payload) => {
-          let { data } = await supabase
-            .from("rofls")
-            .select("*, files:rofl_files( * )")
-            .eq("id", payload.new.id)
-            .limit(1)
-            .single()
+  // useEffect(() => {
+  //   const taskListener = supabase
+  //     .channel("rofls")
+  //     .on(
+  //       "postgres_changes",
+  //       { event: "INSERT", schema: "public", table: "rofls" },
+  //       async (payload) => {
+  //         let { data } = await supabase
+  //           .from("rofls")
+  //           .select("*, files:rofl_files( * )")
+  //           .eq("id", payload.new.id)
+  //           .limit(1)
+  //           .single()
 
-          console.log(data, payload)
+  //         console.log(data, payload)
 
-          if (data) setItems((val) => [...val, data])
-        }
-      )
-      .subscribe()
+  //         if (data) setItems((val) => [...val, data])
+  //       }
+  //     )
+  //     .subscribe()
 
-    return () => {
-      taskListener.unsubscribe()
-    }
-  }, [])
+  //   return () => {
+  //     taskListener.unsubscribe()
+  //   }
+  // }, [])
 
   return (
     <Grid container spacing={2}>

@@ -20,6 +20,7 @@ import "@uppy/audio/dist/style.min.css"
 import "@uppy/image-editor/dist/style.min.css"
 
 import "./style.css"
+import VideoCropPlugin from "@/packages/uppy-video-trim-plugin"
 
 type DropzoneProps = {
   className?: string
@@ -50,31 +51,34 @@ export default function Dropzone({
   }
 
   const uppy = useMemo(() => {
-    return new Uppy({ locale })
-      .use(Webcam)
-      .use(Audio)
-      .use(ScreenCapture)
-      .use(Tus, {
-        endpoint: TUS_ENDPOINT,
-        headers: {
-          authorization: `Bearer ${process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY}`,
-        },
-        uploadDataDuringCreation: true,
-        chunkSize: 6 * 1024 * 1024,
-        allowedMetaFields: [
-          "bucketName",
-          "objectName",
-          "contentType",
-          "cacheControl",
-        ],
-      })
-      .use(Url, {
-        companionUrl: "http://localhost:3020",
-      })
-      .use(Dropbox, {
-        companionUrl: "http://localhost:3020",
-      })
-      .use(ImageEditor)
+    return (
+      new Uppy({ locale })
+        .use(Webcam)
+        .use(Audio)
+        .use(ScreenCapture)
+        .use(Tus, {
+          endpoint: TUS_ENDPOINT,
+          headers: {
+            authorization: `Bearer ${process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY}`,
+          },
+          uploadDataDuringCreation: true,
+          chunkSize: 6 * 1024 * 1024,
+          allowedMetaFields: [
+            "bucketName",
+            "objectName",
+            "contentType",
+            "cacheControl",
+          ],
+        })
+        .use(Url, {
+          companionUrl: "http://localhost:3020",
+        })
+        .use(Dropbox, {
+          companionUrl: "http://localhost:3020",
+        })
+        // .use(ImageEditor)
+        .use(VideoCropPlugin)
+    )
   }, [])
 
   const onUppyComplete = useCallback(

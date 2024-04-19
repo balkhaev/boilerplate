@@ -22,7 +22,7 @@ createBullBoard({
     thumbnailQueue,
     downloadQueue,
   ].map((queue) => new BullAdapter(queue)),
-  serverAdapter: serverAdapter,
+  serverAdapter,
 })
 
 export default serverAdapter
